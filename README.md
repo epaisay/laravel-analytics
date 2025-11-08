@@ -363,14 +363,14 @@ use Epaisay\Analytics\Facades\Analytics;
 Analytics::addSystemAnalyticsRoute('admin.dashboard', ['admin', 'super-admin']);
 ```
 
-### Testing
+## Testing
 
-# Run tests
+#### Run tests
 ```bash
 composer test
 ```
 
-# Run with coverage
+#### Run with coverage
 ```bash
 composer test-coverage
 ```
