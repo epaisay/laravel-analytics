@@ -246,29 +246,29 @@ return [
 
 Aggregate Analytics Data
 
-# Aggregate all models
+#### Aggregate all models
 
 ```bash
 php artisan analytics:aggregate
 ```
 
-# Aggregate specific model
+#### Aggregate specific model
 
 ```bash
 php artisan analytics:aggregate "App\Models\Post"
 ```
 
-# Aggregate recent activities only
+#### Aggregate recent activities only
 ```bash
 php artisan analytics:aggregate --recent
 ```
 
-# Clean up old data
+#### Clean up old data
 ```bash
 php artisan analytics:aggregate --cleanup
 ```
 
-# Clean up orphaned records
+#### Clean up orphaned records
 ```bash
 php artisan analytics:aggregate --orphaned
 ```
@@ -276,17 +276,17 @@ php artisan analytics:aggregate --orphaned
 
 Install Package
 
-# Full installation with migrations
+#### Full installation with migrations
 ```bash
 php artisan analytics:install --migrate
 ```
 
-# Force overwrite existing files
+#### Force overwrite existing files
 ```bash
 php artisan analytics:install --force
 ```
 
-# With demo data seeding
+#### With demo data seeding
 ```bash
 php artisan analytics:install --migrate --seed
 ```
