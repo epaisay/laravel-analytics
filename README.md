@@ -392,7 +392,7 @@ Please see CONTRIBUTING.md for details.
 
 ### License
 
-The MIT License (MIT). Please see LICENSE.md for more information.
+The MIT License (MIT). Please see [LICENSE](LICENSE.md) for more information.
 
 ### Support
 
@@ -400,4 +400,4 @@ For support and questions, please open an issue on GitHub.
 
 ### Changelog
 
-Please see CHANGELOG.md for details on what has changed.
+Please see [CHANGELOG](CHANGELOG.md) for details on what has changed.
