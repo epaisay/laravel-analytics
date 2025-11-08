@@ -1,59 +1,67 @@
-
-# Laravel Analytics Package
+Laravel Analytics Package
 
 A comprehensive analytics package for Laravel applications with detailed tracking, geolocation, and engagement metrics.
 
-## Features
+Features
 
-- 📊 **Comprehensive Tracking**: Track views, likes, shares, clicks, and more
-- 🌍 **Geolocation**: Automatic IP to location conversion with multiple providers
-- 🤖 **Bot Detection**: Identify and categorize bot traffic
-- 📱 **Device Detection**: Track devices, browsers, and platforms
-- ⏱️ **Time-based Analytics**: Daily, weekly, monthly, and yearly period tracking
-- 🔄 **Real-time Aggregation**: Automatic data aggregation from individual interactions
-- 🎯 **Engagement Scoring**: Calculate engagement rates and trend scores
-- 🛡️ **Duplicate Prevention**: Prevent duplicate tracking with unique constraints
-- 📈 **Performance Optimized**: Comprehensive indexing for fast queries
+📊 Comprehensive Tracking: Track views, likes, shares, clicks, and more
 
-## Requirements
+🌍 Geolocation: Automatic IP to location conversion with multiple providers
 
-- PHP 8.1 or higher
-- Laravel 11.0 or higher
-- MySQL, PostgreSQL, or SQLite
+🤖 Bot Detection: Identify and categorize bot traffic
 
-## Installation
+📱 Device Detection: Track devices, browsers, and platforms
 
-### 1. Install via Composer
+⏱️ Time-based Analytics: Daily, weekly, monthly, and yearly period tracking
 
-bash
+🔄 Real-time Aggregation: Automatic data aggregation from individual interactions
+
+🎯 Engagement Scoring: Calculate engagement rates and trend scores
+
+🛡️ Duplicate Prevention: Prevent duplicate tracking with unique constraints
+
+📈 Performance Optimized: Comprehensive indexing for fast queries
+
+Requirements
+
+PHP 8.1 or higher
+
+Laravel 11.0 or higher
+
+MySQL, PostgreSQL, or SQLite
+
+Installation
+
+1. Install via Composer
+
 composer require epaisay/laravel-analytics
 
-### 2. Run the Install Command
-bash
+
+2. Run the Install Command
+
 php artisan analytics:install --migrate
 
 
-
-### 3. Manual Installation (Optional)
+3. Manual Installation (Optional)
 
 If you prefer manual installation:
 
 Publish configuration:
 
-bash
 php artisan vendor:publish --tag=analytics-config
+
 
 Publish migrations:
 
-bash
 php artisan vendor:publish --tag=analytics-migrations
+
 
 Run migrations:
 
-bash
 php artisan migrate
 
-### Register middleware in app/Http/Kernel.php
+
+4. Register middleware in app/Http/Kernel.php
 
 protected $middlewareGroups = [
     'web' => [
@@ -63,10 +71,11 @@ protected $middlewareGroups = [
 ];
 
 
-## Usage
-### 1. Add Trait to Your Models
-Add the HasAnalytics trait to any model you want to track:
+Usage
 
+1. Add Trait to Your Models
+
+Add the HasAnalytics trait to any model you want to track:
 
 <?php
 
@@ -82,22 +91,22 @@ class Post extends Model
     // Your model code...
 
     /**
-     * Add custom tracked actions
-     * These controller methods will be automatically tracked
+     * Add custom tracked actions.
+     * These controller methods will be automatically tracked.
      */
     protected static function customTrackedActions(): array
     {
         return [
             'showPost',
-            //Add More Functions Here,
-            //Any function name on controller,
+            // Add more controller method names here
         ];
     }
 }
 
-## 2. Define Tracked Actions
 
-The package automatically tracks these default actions:
+2. Define Tracked Actions
+
+The package automatically tracks these default controller actions:
 
 show
 
@@ -107,11 +116,9 @@ view
 
 display
 
-//Any function on name controller 
+Add your own custom actions by overriding the customTrackedActions method in your model, as shown above.
 
-Add custom actions by overriding the customTrackedActions method in your model.
-
-## 3. Using the Analytics Facade
+3. Using the Analytics Facade
 
 use Epaisay\Analytics\Facades\Analytics;
 
@@ -136,14 +143,14 @@ $browserStats = Analytics::getBrowserAnalytics($post);
 // Get geolocation analytics
 $locationStats = Analytics::getGeolocationAnalytics($post);
 
-## 4. Using in Controllers
+
+4. Using in Controllers
 
 Your controller methods will be automatically tracked if they're in the getTrackedActions() list:
 
-php
 public function show(Post $post)
 {
-    // This action is automatically tracked
+    // This action is automatically tracked (if 'show' is in the list)
     return view('posts.show', compact('post'));
 }
 
@@ -153,7 +160,8 @@ public function showAgency(Post $post)
     return view('posts.agency', compact('post'));
 }
 
-## 5. Accessing Analytics Data
+
+5. Accessing Analytics Data
 
 $post = Post::find(1);
 
@@ -176,17 +184,17 @@ $isBookmarked = $post->isBookmarkedByUser(auth()->id());
 // Get analytics timeline
 $timeline = $post->getAnalyticsTimeline('7days', 'views_count');
 
-## Configuration
+
+Configuration
 
 After installation, configure the package in config/analytics.php:
 
-php
 return [
     'enabled' => env('ANALYTICS_ENABLED', true),
     
     'geolocation' => [
         'enabled' => env('ANALYTICS_GEOLOCATION_ENABLED', true),
-        'cache_ttl' => env('ANALYTICS_GEOLOCATION_CACHE_TTL', 30),
+        'cache_ttl' => env('ANALYTICS_GEOLOCATION_CACHE_TTL', 30), // in minutes
     ],
     
     'tracked_actions' => [
@@ -204,66 +212,72 @@ return [
     ],
 ];
 
-## Commands
+
+Commands
 
 Aggregate Analytics Data
-bash
-### Aggregate all models
+
+# Aggregate all models
 php artisan analytics:aggregate
 
-### Aggregate specific model
+# Aggregate specific model
 php artisan analytics:aggregate "App\Models\Post"
 
-### Aggregate recent activities only
+# Aggregate recent activities only
 php artisan analytics:aggregate --recent
 
-### Clean up old data
+# Clean up old data
 php artisan analytics:aggregate --cleanup
 
-### Clean up orphaned records
+# Clean up orphaned records
 php artisan analytics:aggregate --orphaned
 
-## Install Package
 
-bash
-### Full installation with migrations
+Install Package
+
+# Full installation with migrations
 php artisan analytics:install --migrate
 
-### Force overwrite existing files
+# Force overwrite existing files
 php artisan analytics:install --force
 
-### With demo data seeding
+# With demo data seeding
 php artisan analytics:install --migrate --seed
 
-## Database Schema
+
+Database Schema
+
 The package creates three main tables:
 
-### analytics
+analytics
+
 Tracks engagement metrics per user/visitor per model
 
 Polymorphic relationship to any model
 
 Comprehensive metrics for views, likes, shares, etc.
 
-### views
+views
+
 Detailed view tracking with geolocation
 
 Device and browser information
 
 Bot detection and categorization
 
-### periods
+periods
+
 Time-based aggregation (daily, weekly, monthly, yearly)
 
 Growth rate calculations
 
 Historical trend analysis
 
-## Advanced Usage
+Advanced Usage
 
-### Custom Metric Tracking
-php
-// Track custom metrics
+Custom Metric Tracking
+
+// Track custom metrics directly on the model
 $post->trackLike();
 $post->trackShare();
 $post->trackBookmark();
@@ -272,11 +286,13 @@ $post->trackFollow();
 // Or use the facade
 Analytics::incrementMetric($post, 'custom_metric_count');
 
-### Bot Detection Customization
-The package automatically detects and categorizes bots. You can customize bot categories in the configuration.
 
-### Geolocation Service
-php
+Bot Detection Customization
+
+The package automatically detects and categorizes bots. You can customize bot categories in the config/analytics.php configuration file.
+
+Geolocation Service
+
 use Epaisay\Analytics\Services\GeolocationService;
 
 $service = app(GeolocationService::class);
@@ -285,39 +301,47 @@ $location = $service->getLocationData('8.8.8.8');
 // Test the service
 $status = $service->getServiceStatus();
 
-### System-wide Analytics
+
+System-wide Analytics
+
 Track system-wide metrics for specific routes:
 
-php
 use Epaisay\Analytics\Facades\Analytics;
 
 Analytics::addSystemAnalyticsRoute('admin.dashboard', ['admin', 'super-admin']);
 
-## Testing
-bash
-### Run tests
+
+Testing
+
+# Run tests
 composer test
 
-### Run with coverage
+# Run with coverage
 composer test-coverage
 
-### Security
-IP addresses are hashed for privacy
 
-Bot traffic can be filtered
+Security
 
-Private IP ranges get development location data
+IP addresses are hashed for privacy.
 
-### Comprehensive audit trails
+Bot traffic can be filtered.
 
-### Contributing
-Please see CONTRIBUTING for details.
+Private IP ranges get development location data.
 
-### License
-The MIT License (MIT). Please see License File for more information.
+Comprehensive audit trails.
 
-### Support
+Contributing
+
+Please see CONTRIBUTING.md for details.
+
+License
+
+The MIT License (MIT). Please see LICENSE.md for more information.
+
+Support
+
 For support and questions, please open an issue on GitHub.
 
-### Changelog
-Please see CHANGELOG for details on what has changed.
+Changelog
+
+Please see CHANGELOG.md for details on what has changed.
