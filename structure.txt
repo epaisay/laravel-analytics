@@ -1,0 +1,50 @@
+laravel-analytics/
+├── src/
+│   ├── Console/
+│   │   └── Commands/
+│   │       ├── AggregateAnalytics.php
+│   │       └── InstallAnalytics.php
+│   ├── Facades/
+│   │   └── Analytics.php
+│   ├── Helpers/
+│   │   └── AnalyticsHelper.php
+│   ├── Middleware/
+│   │   └── TrackAnalytics.php
+│   ├── Models/
+│   │   ├── Analytic.php
+│   │   ├── View.php
+│   │   └── Period.php
+│   ├── Observers/
+│   │   └── AnalyticsObserver.php
+│   ├── Providers/
+│   │   └── AnalyticsServiceProvider.php
+│   ├── Services/
+│   │   ├── AnalyticsAggregationService.php
+│   │   └── GeolocationService.php
+│   └── Traits/
+│       └── HasAnalytics.php
+├── database/
+│   └── migrations/
+│       ├── create_analytics_table.php
+│       ├── create_views_table.php
+│       └── create_periods_table.php
+├── tests/
+│   ├── Feature/
+│   │   └── AnalyticsTrackingTest.php
+│   ├── Unit/
+│   │   ├── AnalyticTest.php
+│   │   └── ViewTest.php
+│   └── TestCase.php
+├── config/
+│   └── analytics.php
+├── stubs/
+│   ├── Post.stub
+│   └── PostController.stub
+├── composer.json
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── README.md
+├── LICENSE.md
+├── .gitignore
+└── phpunit.xml

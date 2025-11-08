@@ -1,0 +1,86 @@
+{
+    "name": "epaisay/laravel-analytics",
+    "description": "A comprehensive analytics package for Laravel applications with detailed tracking, geolocation, bot detection, and engagement metrics",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "analytics",
+        "tracking",
+        "geolocation",
+        "statistics",
+        "metrics",
+        "views",
+        "engagement",
+        "bot-detection",
+        "laravel-package"
+    ],
+    "homepage": "https://github.com/epaisay/laravel-analytics",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ePaisay Marketplace",
+            "email": "developers@epaisay.com",
+            "homepage": "https://epaisay.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@epaisay.com",
+        "issues": "https://github.com/epaisay/laravel-analytics/issues",
+        "source": "https://github.com/epaisay/laravel-analytics",
+        "docs": "https://github.com/epaisay/laravel-analytics/wiki"
+    },
+    "require": {
+        "php": "^8.1|^8.2",
+        "laravel/framework": "^11.0|^12.0",
+        "spatie/laravel-activitylog": "^4.8",
+        "ramsey/uuid": "^4.7",
+        "hisorange/browser-detect": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0",
+        "phpunit/phpunit": "^10.0",
+        "mockery/mockery": "^1.6",
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "Epaisay\\Analytics\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Epaisay\\Analytics\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Epaisay\\Analytics\\Providers\\AnalyticsServiceProvider"
+            ],
+            "aliases": {
+                "Analytics": "Epaisay\\Analytics\\Facades\\Analytics"
+            }
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "analyse": "vendor/bin/phpstan analyse",
+        "lint": "vendor/bin/pint"
+    },
+    "scripts-descriptions": {
+        "test": "Run the test suite",
+        "test-coverage": "Run tests with code coverage report",
+        "analyse": "Run static analysis",
+        "lint": "Format code using Laravel Pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
