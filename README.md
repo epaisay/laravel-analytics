@@ -1,4 +1,4 @@
-Laravel Analytics Package
+# Laravel Analytics Package
 
 A comprehensive analytics package for Laravel applications with detailed tracking, geolocation, and engagement metrics.
 
@@ -22,7 +22,7 @@ Features
 
 📈 Performance Optimized: Comprehensive indexing for fast queries
 
-Requirements
+## Requirements
 
 PHP 8.1 or higher
 
@@ -30,36 +30,55 @@ Laravel 11.0 or higher
 
 MySQL, PostgreSQL, or SQLite
 
-Installation
+## Installation
 
 1. Install via Composer
 
+```bash
+
 composer require epaisay/laravel-analytics
 
+```
 
-2. Run the Install Command
+
+### 2. Run the Install Command
+
+```bash
 
 php artisan analytics:install --migrate
 
+```
 
-3. Manual Installation (Optional)
+
+### 3. Manual Installation (Optional)
 
 If you prefer manual installation:
 
 Publish configuration:
 
+```bash
+
 php artisan vendor:publish --tag=analytics-config
+
+```
 
 
 Publish migrations:
 
+```bash
 php artisan vendor:publish --tag=analytics-migrations
+
+```
 
 
 Run migrations:
 
+```bash
 php artisan migrate
 
+```
+
+```php
 
 4. Register middleware in app/Http/Kernel.php
 
@@ -70,13 +89,15 @@ protected $middlewareGroups = [
     ],
 ];
 
+```
 
-Usage
+### Usage
 
 1. Add Trait to Your Models
 
 Add the HasAnalytics trait to any model you want to track:
 
+```php
 <?php
 
 namespace App\Models;
@@ -102,9 +123,9 @@ class Post extends Model
         ];
     }
 }
+```
 
-
-2. Define Tracked Actions
+### 2. Define Tracked Actions
 
 The package automatically tracks these default controller actions:
 
@@ -118,7 +139,9 @@ display
 
 Add your own custom actions by overriding the customTrackedActions method in your model, as shown above.
 
-3. Using the Analytics Facade
+### 3. Using the Analytics Facade
+
+```php
 
 use Epaisay\Analytics\Facades\Analytics;
 
@@ -142,11 +165,13 @@ $browserStats = Analytics::getBrowserAnalytics($post);
 
 // Get geolocation analytics
 $locationStats = Analytics::getGeolocationAnalytics($post);
+```
 
+### 4. Using in Controllers
 
-4. Using in Controllers
+Your controller methods will be automatically tracked if theyre in the getTrackedActions() list:
 
-Your controller methods will be automatically tracked if they're in the getTrackedActions() list:
+```php
 
 public function show(Post $post)
 {
@@ -160,9 +185,11 @@ public function showAgency(Post $post)
     return view('posts.agency', compact('post'));
 }
 
+```
 
-5. Accessing Analytics Data
+### 5. Accessing Analytics Data
 
+```php
 $post = Post::find(1);
 
 // Get total views
@@ -183,12 +210,13 @@ $isBookmarked = $post->isBookmarkedByUser(auth()->id());
 
 // Get analytics timeline
 $timeline = $post->getAnalyticsTimeline('7days', 'views_count');
+```
 
-
-Configuration
+### Configuration
 
 After installation, configure the package in config/analytics.php:
 
+```php
 return [
     'enabled' => env('ANALYTICS_ENABLED', true),
     
@@ -212,44 +240,63 @@ return [
     ],
 ];
 
+```
 
-Commands
+### Commands
 
 Aggregate Analytics Data
 
 # Aggregate all models
+
+```bash
 php artisan analytics:aggregate
+```
 
 # Aggregate specific model
+
+```bash
 php artisan analytics:aggregate "App\Models\Post"
+```
 
 # Aggregate recent activities only
+```bash
 php artisan analytics:aggregate --recent
+```
 
 # Clean up old data
+```bash
 php artisan analytics:aggregate --cleanup
+```
 
 # Clean up orphaned records
+```bash
 php artisan analytics:aggregate --orphaned
+```
 
 
 Install Package
 
 # Full installation with migrations
+```bash
 php artisan analytics:install --migrate
+```
 
 # Force overwrite existing files
+```bash
 php artisan analytics:install --force
+```
 
 # With demo data seeding
+```bash
 php artisan analytics:install --migrate --seed
+```
 
 
-Database Schema
+### Database Schema
 
 The package creates three main tables:
 
-analytics
+#### analytics
 
 Tracks engagement metrics per user/visitor per model
 
@@ -257,7 +304,7 @@ Polymorphic relationship to any model
 
 Comprehensive metrics for views, likes, shares, etc.
 
-views
+#### views
 
 Detailed view tracking with geolocation
 
@@ -265,7 +312,7 @@ Device and browser information
 
 Bot detection and categorization
 
-periods
+#### periods
 
 Time-based aggregation (daily, weekly, monthly, yearly)
 
@@ -273,10 +320,11 @@ Growth rate calculations
 
 Historical trend analysis
 
-Advanced Usage
+### Advanced Usage
 
 Custom Metric Tracking
 
+```php
 // Track custom metrics directly on the model
 $post->trackLike();
 $post->trackShare();
@@ -285,13 +333,15 @@ $post->trackFollow();
 
 // Or use the facade
 Analytics::incrementMetric($post, 'custom_metric_count');
+```
 
-
-Bot Detection Customization
+#### Bot Detection Customization
 
 The package automatically detects and categorizes bots. You can customize bot categories in the config/analytics.php configuration file.
 
 Geolocation Service
+
+```php
 
 use Epaisay\Analytics\Services\GeolocationService;
 
@@ -300,27 +350,33 @@ $location = $service->getLocationData('8.8.8.8');
 
 // Test the service
 $status = $service->getServiceStatus();
+```
 
 
-System-wide Analytics
+#### System-wide Analytics
 
 Track system-wide metrics for specific routes:
 
+```php
 use Epaisay\Analytics\Facades\Analytics;
 
 Analytics::addSystemAnalyticsRoute('admin.dashboard', ['admin', 'super-admin']);
+```
 
-
-Testing
+### Testing
 
 # Run tests
+```bash
 composer test
+```
 
 # Run with coverage
+```bash
 composer test-coverage
+```
 
 
-Security
+### Security
 
 IP addresses are hashed for privacy.
 
@@ -330,18 +386,18 @@ Private IP ranges get development location data.
 
 Comprehensive audit trails.
 
-Contributing
+### Contributing
 
 Please see CONTRIBUTING.md for details.
 
-License
+### License
 
 The MIT License (MIT). Please see LICENSE.md for more information.
 
-Support
+### Support
 
 For support and questions, please open an issue on GitHub.
 
-Changelog
+### Changelog
 
 Please see CHANGELOG.md for details on what has changed.
