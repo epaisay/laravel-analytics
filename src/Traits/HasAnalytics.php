@@ -569,6 +569,9 @@ trait HasAnalytics
             'index',
             'view',
             'display',
+            'showPost',
+            // Add More functions Here
+
         ], static::customTrackedActions());
     }
 
