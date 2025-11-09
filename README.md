@@ -78,17 +78,15 @@ php artisan migrate
 
 ```
 
-```php
 
 4. Register middleware in app/Http/Kernel.php
-
+```php
 protected $middlewareGroups = [
     'web' => [
         // ... other middleware
         \Epaisay\Analytics\Middleware\TrackAnalytics::class,
     ],
 ];
-
 ```
 
 ### Usage
