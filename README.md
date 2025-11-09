@@ -32,7 +32,7 @@ MySQL, PostgreSQL, or SQLite
 
 ## Installation
 
-1. Install via Composer
+### 1. Install via Composer
 
 ```bash
 
